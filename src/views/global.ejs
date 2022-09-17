@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>My App</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>
+        7TV Emotes | Data from: <%= channels %> channels and counting more!
+        Since <%= since %>
+      </h1>
+    </div>
+    <div class="leaderboard">
+      <% for (const data of global) { %>
+      <h3><%= data.name %></h3>
+      <p>Count: <%= data.usage %></p>
+      <img src="https://cdn.7tv.app/emote/<%= data.emote %>/2x" />
+      <% } %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>My App</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <% if (emotes.success) { %>
+    <div id="app">
+      <h1>
+        7TV Emotes Data of <%= channel %> <br />
+        Want your channel tracked? Ask @Kattah on twitch
+      </h1>
+    </div>
+    <div class="leaderboard">
+      <% const sortedEmotes = emotes.data.sort((a, b) => b.usage - a.usage); %>
+      <% for (const data of sortedEmotes) { %>
+      <h3><%= data.name %></h3>
+      <p>Count: <%= data.usage %></p>
+      <img src="https://cdn.7tv.app/emote/<%= data.emote %>/2x" />
+      <% } %>
+    </div>
+    <% } else { %>
+    <div id="app">
+      <h1>7TV Emotes Data of <%= channel %></h1>
+      <p>Channel not found</p>
+    </div>
+    <% } %>
+  </body>
+</html>
