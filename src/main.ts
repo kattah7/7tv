@@ -36,9 +36,9 @@ app.get("/top", async (req, res) => {
 });
 
 app.get("/c/:user", async (req, res) => {
-  const user = await fetch(`https://api.kattah.me/c/${req.params.user}`).then(
-    (res) => res.json()
-  );
+  const user = await fetch(
+    `https://api.kattah.me/c/${req.params.user.toLocaleLowerCase()}`
+  ).then((res) => res.json());
   res.render("channel", {
     channel: req.params.user,
     emotes: user,
