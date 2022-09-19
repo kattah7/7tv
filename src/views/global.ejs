@@ -1,20 +1,75 @@
 <html>
   <head>
     <title>7TV Emotes | Global</title>
-    <link rel="stylesheet" href="/assets/styles.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/global.css" />
   </head>
   <body>
-    <div id="app">
-      <h1>
-        7TV Emotes | Data from: <%= channels %> channels and counting more!
-        Since <%= since %>
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="/" id="navbar__logo">Emote Stats</a>
+
+        <div class="navbar__toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="navbar__menu">
+          <li class="navbar__item">
+            <a href="/search" class="navbar__links"> Search </a>
+          </li>
+          <li class="navbar__btn">
+            <a href="/auth/twitch" class="button"> Login </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="stats">
+      <h1 class="channels">
+        Tracking Total <%= channels %> channels and more!
       </h1>
+      <p class="since">Since <%= since %></p>
     </div>
-    <div class="leaderboard">
+    <div
+      style="
+        height: 600px;
+        width: 360px;
+        overflow: auto;
+        background-color: rgb(51, 50, 50);
+        color: white;
+        font-family: arial;
+        padding: 15px;
+        max-width: 100%;
+        overflow-x: hidden;
+      "
+      class="global"
+    >
+      <h3>Global Emotes</h3>
       <% for (const data of global) { %>
-      <h3><%= data.name %></h3>
-      <p>Count: <%= data.usage %></p>
-      <img src="https://cdn.7tv.app/emote/<%= data.emote %>/2x" />
+      <h3 class="emote_name"><%= data.name %></h3>
+      <p class="emote_usage"><%= data.usage.toLocaleString() %></p>
+      <img src="https://cdn.7tv.app/emote/<%= data.emote %>/1x" />
+      <% } %>
+    </div>
+    <div
+      style="
+        height: 600px;
+        width: 360px;
+        overflow: auto;
+        background-color: rgb(51, 50, 50);
+        color: white;
+        font-family: arial;
+        padding: 15px;
+        max-width: 100%;
+        overflow-x: hidden;
+      "
+      class="top"
+    >
+      <h3>Top Used Channel Emotes</h3>
+      <% for (const data of channelEmotes) { %>
+      <h3 class="emote_name"><%= data.name %></h3>
+      <p class="emote_usage"><%= data.usage.toLocaleString() %></p>
+      <img src="https://cdn.7tv.app/emote/<%= data.emote %>/1x" />
       <% } %>
     </div>
   </body>

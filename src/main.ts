@@ -5,6 +5,11 @@ const app = express();
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
+app.use(express.static("src/public"));
+app.use("/css", express.static(__dirname + "public/css"));
+app.use("/js", express.static(__dirname + "public/js"));
+app.use("/img", express.static(__dirname + "public/img"));
+
 app.get("/", async (req, res) => {
   const global = await fetch(`https://api.kattah.me/global`).then((res) =>
     res.json()
@@ -15,23 +20,18 @@ app.get("/", async (req, res) => {
     (a: { usage: number }, b: { usage: number }) => b.usage - a.usage
   );
 
-  res.render("global", {
-    global: sortbyTopUsage,
-    channels: logging_channels.toLocaleString(),
-    since: logging_since.split("T")[0],
-  });
-});
-
-app.get("/top", async (req, res) => {
   const { channels, data } = await fetch(`https://api.kattah.me/top`).then(
     (res) => res.json()
   );
   const sorted = data.sort(
     (a: { usage: number }, b: { usage: number }) => b.usage - a.usage
   );
-  res.render("top", {
-    channels: channels,
-    emotes: sorted,
+
+  res.render("global", {
+    global: sortbyTopUsage,
+    channels: logging_channels.toLocaleString(),
+    since: logging_since.split("T")[0],
+    channelEmotes: sorted,
   });
 });
 

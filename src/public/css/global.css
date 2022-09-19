@@ -1,0 +1,61 @@
+body {
+    background-color: #201d1d;
+    margin: 0;
+    padding: 0;
+}
+
+div.global {
+    position: absolute;
+    top: 10%;
+    right: 60%;
+    transform: translate(5%, 20%);
+    scrollbar-gutter: auto;
+}
+
+div.global h3.emote_name {
+    position: relative;
+    right: -17%;
+    top: 6%;
+    font-size: 15px;
+}
+
+div.global p.emote_usage {
+    position: relative;
+    right: -17%;
+    top: 6%;
+    font-size: 15px;
+}
+
+div.top {
+    position: absolute;
+    top: 10%;
+    right: 30%;
+    transform: translate(5%, 20%);
+    scrollbar-gutter: auto;
+}
+
+div.top h3.emote_name {
+    position: relative;
+    right: -17%;
+    top: 6%;
+    font-size: 15px;
+}
+
+div.top p.emote_usage {
+    position: relative;
+    right: -17%;
+    top: 6%;
+    font-size: 15px;
+}
+
+div.stats h1.channels {
+    right: -32%;
+    font-size: 30px;
+    color: #ffffffd7;
+}
+
+div.stats .since {
+    right: -42%;
+    font-size: 25px;
+    color: #ffffff91;
+}
