@@ -35,13 +35,18 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.get("/c/:user", async (req, res) => {
-  const user = await fetch(
-    `https://api.kattah.me/c/${req.params.user.toLocaleLowerCase()}`
+app.get("/search", async (req, res) => {
+  res.render("search");
+});
+
+app.get("/c", async (req, res) => {
+  const user = req.query.user
+  const userData = await fetch(
+    `https://api.kattah.me/c/${user}`
   ).then((res) => res.json());
   res.render("channel", {
-    channel: req.params.user,
-    emotes: user,
+    channel: user,
+    emotes: userData,
   });
 });
 
