@@ -5,12 +5,11 @@
     <link rel="stylesheet" href="css/global.css" />
   </head>
   <body>
-    <script src="js/mainpage.js">
-    </script>
+    <script src="js/mainpage.js"></script>
     <script>
-      function disableJoin () {
-                document.getElementById("join").disabled = true;
-            }
+      function disableJoin() {
+        document.getElementById("join").disabled = true;
+      }
     </script>
     <nav class="navbar">
       <div class="navbar__container">
@@ -27,18 +26,25 @@
             <a href="/search" class="navbar__links"> Search </a>
           </li>
           <li class="navbar__item">
-            <button style="background-color:#131313; border: none;" class="navbar__links" id="join" onclick="disableJoin(), location.href='/c?user=<%= session.passport.user.data[0].login %>'">  My Channel </button>
+            <button
+              style="background-color: #131313; border: none"
+              class="navbar__links"
+              id="join"
+              onclick="disableJoin(), location.href='/c?user=<%= session.passport.user.data[0].login %>'"
+            >
+              My Channel
+            </button>
           </li>
           <li class="navbar__btn">
             <a href="/logout" class="button"> Logout </a>
           </li>
           <% } else { %>
-            <li class="navbar__item">
-              <a href="/search" class="navbar__links"> Search </a>
-            </li>
-            <li class="navbar__btn">
-              <a href="/auth/twitch" class="button"> Login </a>
-            </li>
+          <li class="navbar__item">
+            <a href="/search" class="navbar__links"> Search </a>
+          </li>
+          <li class="navbar__btn">
+            <a href="/auth/twitch" class="button"> Login </a>
+          </li>
           <% } %>
         </ul>
       </div>
