@@ -1,0 +1,15 @@
+body {
+    background-color: #201d1d;
+    margin: 0;
+    padding: 0;
+}
+
+article.OtherRelated {
+    position: absolute;
+    top: 25%;
+    left: 42%;
+}
+
+.OtherRelated div.Search h3 {
+    color: rgb(100, 98, 98);
+}

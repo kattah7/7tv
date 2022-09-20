@@ -1,8 +1,8 @@
 <html>
   <head>
-    <title>7TV Emotes | Global</title>
+    <title>7TV Emotes | Search</title>
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/search.css" />
   </head>
   <body>
     <script src="js/mainpage.js">
@@ -43,53 +43,15 @@
         </ul>
       </div>
     </nav>
-    <div class="stats">
-      <h1 class="channels">
-        Tracking Total <%= channels %> channels and more!
-      </h1>
-      <p class="since">Since <%= since %></p>
-    </div>
-    <div
-      style="
-        height: 600px;
-        width: 360px;
-        overflow: auto;
-        background-color: rgb(51, 50, 50);
-        color: white;
-        font-family: arial;
-        padding: 15px;
-        max-width: 100%;
-        overflow-x: hidden;
-      "
-      class="global"
-    >
-      <h3>Global Emotes</h3>
-      <% for (const data of global) { %>
-      <h3 class="emote_name"><%= data.name %></h3>
-      <p class="emote_usage"><%= data.usage.toLocaleString() %></p>
-      <img src="https://cdn.7tv.app/emote/<%= data.emote %>/1x" />
-      <% } %>
-    </div>
-    <div
-      style="
-        height: 600px;
-        width: 360px;
-        overflow: auto;
-        background-color: rgb(51, 50, 50);
-        color: white;
-        font-family: arial;
-        padding: 15px;
-        max-width: 100%;
-        overflow-x: hidden;
-      "
-      class="top"
-    >
-      <h3>Top Used Channel Emotes</h3>
-      <% for (const data of channelEmotes) { %>
-      <h3 class="emote_name"><%= data.name %></h3>
-      <p class="emote_usage"><%= data.usage.toLocaleString() %></p>
-      <img src="https://cdn.7tv.app/emote/<%= data.emote %>/1x" />
-      <% } %>
-    </div>
+    <article class="OtherRelated">
+        <div class="Search">
+            <h3>Search for User</h3>
+            <form class="SearchUser" action="/c" method="GET" style="text-transform:lowercase">
+            <input class="form-control" name="user" type="text" placeholder="Channel" style="max-width: 250px" autofocus="" required=""
+                maxlength="26">
+            <input class="btn btn-primary" type="submit" value="🔍" ></form>
+            <img class="doctor" src="img/YEAHBUT7TV.gif"width="140" height="140">
+        </div>
+    </article>
   </body>
 </html>

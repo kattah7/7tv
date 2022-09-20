@@ -11,6 +11,9 @@
         Want your channel tracked? Ask @Kattah on twitch
       </h1>
     </div>
+    <% if (stv.error) { %>
+      <p>Channel not found</p>
+    <% } %>
     <div class="leaderboard">
       <% const sortedEmotes = emotes.data.sort((a, b) => b.usage - a.usage); %>
       <% for (const data of sortedEmotes) { %>
