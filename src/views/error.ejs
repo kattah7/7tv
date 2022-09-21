@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <title>7TV Emotes | Error</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/channel.css" />
+  </head>
+  <body>
+    <script src="js/mainpage.js"></script>
+    <script>
+      function disableJoin() {
+        document.getElementById("join").disabled = true;
+      }
+    </script>
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="/" id="navbar__logo">Emote Stats</a>
+
+        <div class="navbar__toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="navbar__menu">
+          <% if (session.passport && session.passport.user) { %>
+          <li class="navbar__item">
+            <a href="/search" class="navbar__links"> Search </a>
+          </li>
+          <li class="navbar__item">
+            <a
+              href="/c?user=<%= session.passport.user.data[0].login %>"
+              class="navbar__links"
+            >
+              My Channel
+            </a>
+          </li>
+          <li class="navbar__btn">
+            <a href="/logout" class="button"> Logout </a>
+          </li>
+          <% } else { %>
+          <li class="navbar__item">
+            <a href="/search" class="navbar__links"> Search </a>
+          </li>
+          <li class="navbar__btn">
+            <a href="/auth/twitch" class="button" id="join">Login</a>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+    <div id="app">
+      <h1>7TV Emotes Data of <%= channel %></h1>
+      <p>Channel not found, contact Kattah or authorize with Twitch</p>
+      <% if (ivr.length === 0) { %>
+      <p>Unknown Twitch Channel</p>
+      <% } %>
+    </div>
+  </body>
+</html>

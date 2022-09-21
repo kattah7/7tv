@@ -177,6 +177,13 @@ app.get("/c", async (req: any, res: any) => {
   const loginToUID = await fetch(
     `https://api.ivr.fi/v2/twitch/user?login=${user}`
   ).then((res) => res.json());
+  if (loginToUID.length === 0) {
+    return res.render("error", {
+      channel: user,
+      session: req.session,
+      ivr: loginToUID,
+    });
+  }
   const stvData = await fetch(
     `https://7tv.io/v3/users/twitch/${loginToUID[0]["id"]}`
   ).then((res) => res.json());
