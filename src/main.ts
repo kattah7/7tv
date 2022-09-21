@@ -8,6 +8,7 @@ import { Strategy as OAuth2Strategy } from "passport-oauth2";
 import request from "request";
 
 import join from "./routes/join";
+const { joinChannelByUsername } = require("./rpc/bot");
 
 declare module "express-session" {
   export interface SessionData {
@@ -37,7 +38,6 @@ app.use("/js", express.static(__dirname + "public/js"));
 app.use("/img", express.static(__dirname + "public/img"));
 
 app.use(join);
-
 
 OAuth2Strategy.prototype.userProfile = function (accessToken, done) {
   const options = {
@@ -135,6 +135,11 @@ app.get("/", async (req: any, res: any) => {
     (a: { usage: number }, b: { usage: number }) => b.usage - a.usage
   );
 
+  if (req.session && req.session.passport && req.session.passport.user) {
+    const { login } = req.session.passport.user.data[0];
+    await joinChannelByUsername(login);
+  }
+
   res.render("global", {
     global: sortbyTopUsage,
     channels: logging_channels.toLocaleString(),
@@ -152,25 +157,38 @@ app.get("/logout", (req, res, next) => {
       return res.redirect("/");
     }
   });
-})
+});
 
-app.get("/search", async (req, res) => {
+app.get("/search", async (req: any, res: any) => {
+  if (req.session && req.session.passport && req.session.passport.user) {
+    const { login } = req.session.passport.user.data[0];
+    await joinChannelByUsername(login);
+  }
   res.render("search", {
     session: req.session,
   });
 });
 
-app.get("/c", async (req, res) => {
+app.get("/c", async (req: any, res: any) => {
   const user = req.query.user;
   const userData = await fetch(`https://api.kattah.me/c/${user}`).then((res) =>
     res.json()
   );
-  const loginToUID = await fetch(`https://api.ivr.fi/v2/twitch/user?login=${user}`).then((res) => res.json());
-  const stvData = await fetch(`https://7tv.io/v3/users/twitch/${loginToUID[0]["id"]}`).then((res) => res.json());
+  const loginToUID = await fetch(
+    `https://api.ivr.fi/v2/twitch/user?login=${user}`
+  ).then((res) => res.json());
+  const stvData = await fetch(
+    `https://7tv.io/v3/users/twitch/${loginToUID[0]["id"]}`
+  ).then((res) => res.json());
+  if (req.session && req.session.passport && req.session.passport.user) {
+    const { login } = req.session.passport.user.data[0];
+    await joinChannelByUsername(login);
+  }
   res.render("channel", {
     channel: user,
     emotes: userData,
-    stv: stvData
+    stv: stvData,
+    session: req.session,
   });
 });
 

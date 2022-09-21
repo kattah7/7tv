@@ -1,31 +1,85 @@
 <html>
   <head>
-    <title>Channel | <%= channel %></title>
-    <link rel="stylesheet" href="/assets/styles.css" />
+    <title>7TV Emotes | <%= channel %></title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/channel.css" />
   </head>
   <body>
+    <script src="js/mainpage.js"></script>
+    <script>
+      function disableJoin() {
+        document.getElementById("join").disabled = true;
+      }
+    </script>
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="/" id="navbar__logo">Emote Stats</a>
+
+        <div class="navbar__toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="navbar__menu">
+          <% if (session.passport && session.passport.user) { %>
+          <li class="navbar__item">
+            <a href="/search" class="navbar__links"> Search </a>
+          </li>
+          <li class="navbar__item">
+            <a
+              href="/c?user=<%= session.passport.user.data[0].login %>"
+              class="navbar__links"
+            >
+              My Channel
+            </a>
+          </li>
+          <li class="navbar__btn">
+            <a href="/logout" class="button"> Logout </a>
+          </li>
+          <% } else { %>
+          <li class="navbar__item">
+            <a href="/search" class="navbar__links"> Search </a>
+          </li>
+          <li class="navbar__btn">
+            <a href="/auth/twitch" class="button" id="join">Login</a>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
     <% if (emotes.success) { %>
-    <div id="app">
-      <h1>
-        7TV Emotes Data of <%= channel %> <br />
-        Want your channel tracked? Ask @Kattah on twitch
-      </h1>
-    </div>
-    <% if (stv.error) { %>
-      <p>Channel not found</p>
-    <% } %>
-    <div class="leaderboard">
+    <img class="pfp" src="<%= stv.user.profile_picture_url %>" />
+    <h3 class="username"><%= stv.user.display_name %></h3>
+    <div
+      style="
+        height: 600px;
+        width: 360px;
+        overflow: auto;
+        background-color: rgb(51, 50, 50);
+        color: white;
+        font-family: arial;
+        padding: 15px;
+        max-width: 100%;
+        overflow-x: hidden;
+      "
+      class="top"
+    >
+      <h3>Top Used Channel Emotes in <%= channel %></h3>
       <% const sortedEmotes = emotes.data.sort((a, b) => b.usage - a.usage); %>
       <% for (const data of sortedEmotes) { %>
-      <h3><%= data.name %></h3>
-      <p>Count: <%= data.usage %></p>
-      <img src="https://cdn.7tv.app/emote/<%= data.emote %>/2x" />
+      <h3 class="emote_name"><%= data.name %></h3>
+      <p class="emote_usage"><%= data.usage.toLocaleString() %></p>
+      <img src="https://cdn.7tv.app/emote/<%= data.emote %>/1x" />
       <% } %>
     </div>
     <% } else { %>
     <div id="app">
       <h1>7TV Emotes Data of <%= channel %></h1>
-      <p>Channel not found</p>
+      <p>Channel not found, contact Kattah or authorize with Twitch</p>
+      <% if (stv.error) { %>
+      <p>User has never logged into 7TV</p>
+      <% } %>
     </div>
     <% } %>
   </body>
