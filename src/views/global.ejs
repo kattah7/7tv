@@ -91,7 +91,7 @@
       <h3>Top Used Channel Emotes</h3>
       <% for (const data of channelEmotes) { %>
       <h3 class="emote_name"><%= data.name %></h3>
-      <p class="emote_usage"><%= data.usage.toLocaleString() %></p>
+      <p class="emote_usage"><%= data.usage %></p>
       <img src="https://cdn.7tv.app/emote/<%= data.emote %>/1x" />
       <% } %>
     </div>
