@@ -170,7 +170,7 @@ app.get("/search", async (req: any, res: any) => {
 });
 
 app.get("/c", async (req: any, res: any) => {
-  const user = req.query.user;
+  const user = req.query.user.toLowerCase();
   const userData = await fetch(`https://api.kattah.me/c/${user}`).then((res) =>
     res.json()
   );
