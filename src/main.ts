@@ -171,7 +171,7 @@ app.get("/search", async (req: any, res: any) => {
 
 app.get("/c", async (req: any, res: any) => {
   if (!req.query.user || !/^[A-Z_\d]{2,27}$/i.test(req.query.user))
-    res.redirect(`/`);
+    return res.redirect(`/`);
   const user = req.query.user.toLowerCase();
   const userData = await fetch(`https://api.kattah.me/c/${user}`).then((res) =>
     res.json()
