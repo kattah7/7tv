@@ -15,7 +15,9 @@
         const textChannelCount = document.getElementById("channelCount");
         const emoteUsageCount = document.getElementById("globalUsage");
         setInterval(async () => {
-          await fetch("https://api.kattah.me/global")
+          await fetch("https://api.kattah.me/global", {
+            method: "GET",
+          })
             .then((res) => res.json())
             .then((data) => {
               const { logging_channels, global } = data.data;
@@ -31,7 +33,9 @@
               textChannelCount.innerText = `Tracking Total ${logging_channels.toLocaleString()} channels and more!`;
             });
 
-          await fetch("https://api.kattah.me/top")
+          await fetch("https://api.kattah.me/top", {
+            method: "GET",
+          })
             .then((res) => res.json())
             .then((result) => {
               const { data } = result;
