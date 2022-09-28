@@ -21,9 +21,7 @@
             .then((res) => res.json())
             .then((data) => {
               const { logging_channels, global } = data.data;
-              const sortByUsage = global[0].emotes.sort(
-                (a, b) => b.usage - a.usage
-              );
+              const sortByUsage = global.sort((a, b) => b.usage - a.usage);
               sortByUsage.forEach((emote) => {
                 const emoteElement = document.getElementById(emote.emote);
                 if (emoteElement) {

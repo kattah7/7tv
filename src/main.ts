@@ -119,12 +119,11 @@ app.get(
 );
 
 app.get("/", async (req: any, res: any) => {
-  const global = await fetch(`https://api.kattah.me/global`).then((res) =>
+  const globalEmotes = await fetch(`https://api.kattah.me/global`).then((res) =>
     res.json()
   );
-  const { logging_since, logging_channels } = global.data;
-  const emotes = global.data.global[0].emotes;
-  const sortbyTopUsage = emotes.sort(
+  const { logging_since, logging_channels, global } = globalEmotes.data;
+  const sortbyTopUsage = global.sort(
     (a: { usage: number }, b: { usage: number }) => b.usage - a.usage
   );
 
