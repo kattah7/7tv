@@ -6,6 +6,7 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy as OAuth2Strategy } from "passport-oauth2";
 import request from "request";
+import cors from "cors";
 
 import join from "./routes/join";
 const { joinChannelByUsername } = require("./rpc/bot");
@@ -28,6 +29,7 @@ app.use(
 );
 app.use(passport.session());
 app.use(passport.initialize());
+app.use(cors());
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
