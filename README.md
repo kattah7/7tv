@@ -8,5 +8,4 @@ for editing and stuff do yarn dev
 enjoy  
   
 if ur lazy use https://stats.kattah.me  
-for specific channels https://stats.kattah.me/c/:channel  
-for top emotes https://stats.kattah.me/top
+for specific channels https://stats.kattah.me/c?user=xqc

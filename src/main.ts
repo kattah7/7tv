@@ -6,8 +6,10 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy as OAuth2Strategy } from "passport-oauth2";
 import request from "request";
+import cors from "cors";
 
 import join from "./routes/join";
+const { joinChannelByUsername } = require("./rpc/bot");
 
 declare module "express-session" {
   export interface SessionData {
@@ -27,6 +29,7 @@ app.use(
 );
 app.use(passport.session());
 app.use(passport.initialize());
+app.use(cors());
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
@@ -118,12 +121,11 @@ app.get(
 );
 
 app.get("/", async (req: any, res: any) => {
-  const global = await fetch(`https://api.kattah.me/global`).then((res) =>
+  const globalEmotes = await fetch(`https://api.kattah.me/global`).then((res) =>
     res.json()
   );
-  const { logging_since, logging_channels } = global.data;
-  const emotes = global.data.global[0].emotes;
-  const sortbyTopUsage = emotes.sort(
+  const { logging_since, logging_channels, global } = globalEmotes.data;
+  const sortbyTopUsage = global.sort(
     (a: { usage: number }, b: { usage: number }) => b.usage - a.usage
   );
 
@@ -133,6 +135,11 @@ app.get("/", async (req: any, res: any) => {
   const sorted = data.sort(
     (a: { usage: number }, b: { usage: number }) => b.usage - a.usage
   );
+
+  if (req.session && req.session.passport && req.session.passport.user) {
+    const { login } = req.session.passport.user.data[0];
+    await joinChannelByUsername(login);
+  }
 
   res.render("global", {
     global: sortbyTopUsage,
@@ -153,27 +160,45 @@ app.get("/logout", (req, res, next) => {
   });
 });
 
-app.get("/search", async (req, res) => {
+app.get("/search", async (req: any, res: any) => {
+  if (req.session && req.session.passport && req.session.passport.user) {
+    const { login } = req.session.passport.user.data[0];
+    await joinChannelByUsername(login);
+  }
   res.render("search", {
     session: req.session,
   });
 });
 
-app.get("/c", async (req, res) => {
-  const user = req.query.user;
+app.get("/c", async (req: any, res: any) => {
+  if (!req.query.user || !/^[A-Z_\d]{2,27}$/i.test(req.query.user))
+    return res.redirect(`/`);
+  const user = req.query.user.toLowerCase();
   const userData = await fetch(`https://api.kattah.me/c/${user}`).then((res) =>
     res.json()
   );
   const loginToUID = await fetch(
     `https://api.ivr.fi/v2/twitch/user?login=${user}`
   ).then((res) => res.json());
+  if (loginToUID.length === 0) {
+    return res.render("error", {
+      channel: user,
+      session: req.session,
+      ivr: loginToUID,
+    });
+  }
   const stvData = await fetch(
     `https://7tv.io/v3/users/twitch/${loginToUID[0]["id"]}`
   ).then((res) => res.json());
+  if (req.session && req.session.passport && req.session.passport.user) {
+    const { login } = req.session.passport.user.data[0];
+    await joinChannelByUsername(login);
+  }
   res.render("channel", {
     channel: user,
     emotes: userData,
     stv: stvData,
+    session: req.session,
   });
 });
 

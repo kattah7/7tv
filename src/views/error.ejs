@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>7TV Emotes | <%= channel %></title>
+    <title>7TV Emotes | Error</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/channel.css" />
@@ -48,39 +48,12 @@
         </ul>
       </div>
     </nav>
-    <% if (emotes.success) { %>
-    <img class="pfp" src="<%= stv.user.profile_picture_url %>" />
-    <h3 class="username"><%= stv.user.display_name %></h3>
-    <div
-      style="
-        height: 600px;
-        width: 360px;
-        overflow: auto;
-        background-color: rgb(51, 50, 50);
-        color: white;
-        font-family: arial;
-        padding: 15px;
-        max-width: 100%;
-        overflow-x: hidden;
-      "
-      class="top"
-    >
-      <h3>Top Used Channel Emotes in <%= channel %></h3>
-      <% const sortedEmotes = emotes.data.sort((a, b) => b.usage - a.usage); %>
-      <% for (const data of sortedEmotes) { %>
-      <h3 class="emote_name"><%= data.name %></h3>
-      <p class="emote_usage"><%= data.usage.toLocaleString() %></p>
-      <img src="https://cdn.7tv.app/emote/<%= data.emote %>/1x" />
-      <% } %>
-    </div>
-    <% } else { %>
     <div id="app">
       <h1>7TV Emotes Data of <%= channel %></h1>
       <p>Channel not found, contact Kattah or authorize with Twitch</p>
-      <% if (stv.error) { %>
-      <p>User has never logged into 7TV</p>
+      <% if (ivr.length === 0) { %>
+      <p>Unknown Twitch Channel</p>
       <% } %>
     </div>
-    <% } %>
   </body>
 </html>
