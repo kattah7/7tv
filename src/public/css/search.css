@@ -4,12 +4,43 @@ body {
     padding: 0;
 }
 
-article.OtherRelated {
-    position: absolute;
-    top: 25%;
-    left: 42%;
+@media only screen and (min-width: 768px) {
+    .OtherRelated  h3 {
+        position: relative;
+        color: rgb(100, 98, 98);
+        font-size: 70px;
+        left: 50%;
+    }
+
+    article.OtherRelated {
+        position:absolute;
+        top: 15%;
+        left: 5%;
+    }
+    input.form-control {
+        position: relative;
+        top: 5%;
+        left: 50%;
+        height: 30px;
+        width: 300px;
+    }
+    input.btn-primary {
+        position: relative;
+        top: 5%;
+        left: 50%;
+    }
+    img.doctor {
+        position: relative;
+        width: 140px;
+        height:140px;
+        left: 50%
+    }
 }
 
-.OtherRelated div.Search h3 {
-    color: rgb(100, 98, 98);
+@media only screen and (min-width: 1500px) {
+    article.OtherRelated {
+        position: absolute;
+        top: 25%;
+        left: 22%;
+    }
 }

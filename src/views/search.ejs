@@ -1,5 +1,7 @@
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" context="width=device-width, initial-scale=1.0" />
     <title>7TV Emotes | Search</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/search.css" />
@@ -48,28 +50,25 @@
       </div>
     </nav>
     <article class="OtherRelated">
-      <div class="Search">
-        <h3>Search for User</h3>
-        <form
-          class="SearchUser"
-          action="/c"
-          method="GET"
-          style="text-transform: lowercase"
-        >
-          <input
-            class="form-control"
-            name="user"
-            type="text"
-            placeholder="Channel"
-            style="max-width: 250px"
-            autofocus=""
-            required=""
-            maxlength="26"
-          />
-          <input class="btn btn-primary" type="submit" value="🔍" />
-        </form>
-        <img class="doctor" src="img/YEAHBUT7TV.gif" width="140" height="140" />
-      </div>
+      <h3>Search for User</h3>
+      <form
+        class="SearchUser"
+        action="/c"
+        method="GET"
+        style="text-transform: lowercase"
+      >
+        <input
+          class="form-control"
+          name="user"
+          type="text"
+          placeholder="Channel"
+          autofocus=""
+          required=""
+          maxlength="26"
+        />
+        <input class="btn-primary" type="submit" value="🔍" />
+      </form>
+      <img class="doctor" src="img/YEAHBUT7TV.gif" />
     </article>
   </body>
 </html>

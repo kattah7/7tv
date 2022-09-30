@@ -1,3 +1,9 @@
+body {
+    background-color: #201d1d;
+    margin: 0;
+    padding: 0;
+}
+
 div#app h1 {
     color: rgba(255, 255, 255, 0.623);
 }
@@ -6,18 +12,50 @@ div#app p {
     color: rgba(255, 255, 255, 0.5);
 }
 
-img.pfp {
-    position: relative;
-    left: 30%;
-    bottom: -20%;
-    width: 200px;
-    height: 200px;
+@media only screen and (min-width: 768px)  {
+    img.pfp {
+        position: relative;
+        left: 10%;
+        bottom: -20%;
+        width: 200px;
+        height: 200px;
+    }
+    div.top {
+        left: 50%;
+        height: 600px;
+        width: 360px;
+        overflow: auto;
+        background-color: rgb(51, 50, 50);
+        color: white;
+        font-family: arial;
+        padding: 15px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    h3.username {
+        position: relative;
+        left: 10%;
+        bottom: -20%;
+        width: 50px;
+        color: rgba(255, 255, 255, 0.623);
+    }
 }
 
-h3.username {
-    position: relative;
-    left: 30%;
-    bottom: -20%;
-    width: 50px;
-    color: rgba(255, 255, 255, 0.623);
+@media only screen and (min-width: 1500px)  {
+    img.pfp {
+        position: relative;
+        left: 30%;
+        bottom: -20%;
+        width: 200px;
+        height: 200px;
+    }
+
+    h3.username {
+        position: relative;
+        left: 30%;
+        bottom: -20%;
+        width: 50px;
+        color: rgba(255, 255, 255, 0.623);
+    }
+    
 }

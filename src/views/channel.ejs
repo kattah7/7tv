@@ -51,20 +51,7 @@
     <% if (emotes.success) { %>
     <img class="pfp" src="<%= stv.user.profile_picture_url %>" />
     <h3 class="username"><%= stv.user.display_name %></h3>
-    <div
-      style="
-        height: 600px;
-        width: 360px;
-        overflow: auto;
-        background-color: rgb(51, 50, 50);
-        color: white;
-        font-family: arial;
-        padding: 15px;
-        max-width: 100%;
-        overflow-x: hidden;
-      "
-      class="top"
-    >
+    <div class="top">
       <h3>Top Used Channel Emotes in <%= channel %></h3>
       <% const sortedEmotes = emotes.data.sort((a, b) => b.usage - a.usage); %>
       <% for (const data of sortedEmotes) { %>
