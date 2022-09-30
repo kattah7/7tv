@@ -29,7 +29,6 @@
               });
               textChannelCount.innerText = `Tracking Total ${logging_channels.toLocaleString()} channels and more!`;
             });
-
           await fetch("https://api.kattah.me/top", {
             method: "GET",
           })
@@ -46,7 +45,6 @@
             });
         }, 1500);
       }
-
       document.addEventListener("DOMContentLoaded", () => {
         startLiveUpdate();
       });

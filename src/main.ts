@@ -129,8 +129,8 @@ app.get("/", async (req: any, res: any) => {
     (a: { usage: number }, b: { usage: number }) => b.usage - a.usage
   );
 
-  const { data } = await fetch(`https://api.kattah.me/top`).then((res) =>
-    res.json()
+  const { channels, data } = await fetch(`https://api.kattah.me/top`).then(
+    (res) => res.json()
   );
   const sorted = data.sort(
     (a: { usage: number }, b: { usage: number }) => b.usage - a.usage
