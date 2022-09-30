@@ -10,6 +10,46 @@
       function disableJoin() {
         document.getElementById("join").disabled = true;
       }
+      function startLiveUpdate() {
+        const textChannelCount = document.getElementById("channelCount");
+        const emoteUsageCount = document.getElementById("globalUsage");
+        setInterval(async () => {
+          await fetch("https://api.kattah.me/global", {
+            method: "GET",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              const { logging_channels, global } = data.data;
+              const sortByUsage = global.sort((a, b) => b.usage - a.usage);
+              sortByUsage.forEach((emote) => {
+                const emoteElement = document.getElementById(emote.emote);
+                if (emoteElement) {
+                  emoteElement.innerHTML = emote.usage.toLocaleString();
+                }
+              });
+              textChannelCount.innerText = `Tracking Total ${logging_channels.toLocaleString()} channels and more!`;
+            });
+
+          await fetch("https://api.kattah.me/top", {
+            method: "GET",
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              const { data } = result;
+              const sortByUsage = data.sort((a, b) => b.usage - a.usage);
+              sortByUsage.forEach((emote) => {
+                const emoteElement = document.getElementById(emote.emote);
+                if (emoteElement) {
+                  emoteElement.innerHTML = emote.usage;
+                }
+              });
+            });
+        }, 1500);
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        startLiveUpdate();
+      });
     </script>
     <nav class="navbar">
       <div class="navbar__container">
@@ -26,14 +66,12 @@
             <a href="/search" class="navbar__links"> Search </a>
           </li>
           <li class="navbar__item">
-            <button
-              style="background-color: #131313; border: none"
+            <a
+              href="/c?user=<%= session.passport.user.data[0].login %>"
               class="navbar__links"
-              id="join"
-              onclick="disableJoin(), location.href='/c?user=<%= session.passport.user.data[0].login %>'"
             >
               My Channel
-            </button>
+            </a>
           </li>
           <li class="navbar__btn">
             <a href="/logout" class="button"> Logout </a>
@@ -43,14 +81,14 @@
             <a href="/search" class="navbar__links"> Search </a>
           </li>
           <li class="navbar__btn">
-            <a href="/auth/twitch" class="button"> Login </a>
+            <a href="/auth/twitch" class="button" id="join">Login</a>
           </li>
           <% } %>
         </ul>
       </div>
     </nav>
     <div class="stats">
-      <h1 class="channels">
+      <h1 id="channelCount" class="channels">
         Tracking Total <%= channels %> channels and more!
       </h1>
       <p class="since">Since <%= since %></p>
@@ -72,7 +110,9 @@
       <h3>Global Emotes</h3>
       <% for (const data of global) { %>
       <h3 class="emote_name"><%= data.name %></h3>
-      <p class="emote_usage"><%= data.usage.toLocaleString() %></p>
+      <p class="emote_usage" id="<%= data.emote %>">
+        <%= data.usage.toLocaleString() %>
+      </p>
       <img src="https://cdn.7tv.app/emote/<%= data.emote %>/1x" />
       <% } %>
     </div>
@@ -93,7 +133,7 @@
       <h3>Top Used Channel Emotes</h3>
       <% for (const data of channelEmotes) { %>
       <h3 class="emote_name"><%= data.name %></h3>
-      <p class="emote_usage"><%= data.usage.toLocaleString() %></p>
+      <p class="emote_usage" id="<%= data.emote %>"><%= data.usage %></p>
       <img src="https://cdn.7tv.app/emote/<%= data.emote %>/1x" />
       <% } %>
     </div>

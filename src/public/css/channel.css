@@ -1,0 +1,23 @@
+div#app h1 {
+    color: rgba(255, 255, 255, 0.623);
+}
+
+div#app p {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+img.pfp {
+    position: relative;
+    left: 30%;
+    bottom: -20%;
+    width: 200px;
+    height: 200px;
+}
+
+h3.username {
+    position: relative;
+    left: 30%;
+    bottom: -20%;
+    width: 50px;
+    color: rgba(255, 255, 255, 0.623);
+}
