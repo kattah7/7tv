@@ -4,14 +4,6 @@ body {
     padding: 0;
 }
 
-div.global {
-    position: absolute;
-    top: 10%;
-    right: 60%;
-    transform: translate(5%, 20%);
-    scrollbar-gutter: auto;
-}
-
 div.global h3.emote_name {
     position: relative;
     right: -17%;
@@ -48,14 +40,103 @@ div.top p.emote_usage {
     font-size: 15px;
 }
 
-div.stats h1.channels {
-    right: -32%;
-    font-size: 30px;
-    color: #ffffffd7;
+@media only screen and (min-width: 768px) {
+    div.stats h1.channels {
+        position: absolute;
+        right: 20%;
+        font-size: 30px;
+        color: #ffffffd7;
+        transform: translate(0%, 20%);
+    }
+    
+    div.stats p.since {
+        position: absolute;
+        font-size: 25px;
+        top: 6%;
+        right: 40%;
+        color: #ffffff91;
+    }
+
+    div.global {
+        position: relative;
+        top: 0%;
+        right: -10%;
+        transform: translate(5%, 15%);
+        scrollbar-gutter: auto;
+        height: 700px;
+        width: 700px;
+        overflow: auto;
+        background-color: rgb(51, 50, 50);
+        color: white;
+        font-family: arial;
+        padding: 15px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    div.top {
+        position: relative;
+        top: 5%;
+        right: -10%;
+        transform: translate(5%, 15%);
+        height: 700px;
+        width: 700px;
+        overflow: auto;
+        background-color: rgb(51, 50, 50);
+        color: white;
+        font-family: arial;
+        padding: 15px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
 }
 
-div.stats .since {
-    right: -42%;
-    font-size: 25px;
-    color: #ffffff91;
+@media only screen and (min-width: 1500px) {
+    div.stats h1.channels {
+        position: absolute;
+        right: 38%;
+        font-size: 30px;
+        color: #ffffffd7;
+    }
+    
+    div.stats p.since {
+        position: absolute;
+        top: 12%;
+        right: 48%;
+        font-size: 25px;
+        color: #ffffff91;
+    }
+    div.global {
+        position: absolute;
+        top: 10%;
+        right: 60%;
+        transform: translate(5%, 20%);
+        scrollbar-gutter: auto;
+        height: 600px;
+        width: 360px;
+        overflow: auto;
+        background-color: rgb(51, 50, 50);
+        color: white;
+        font-family: arial;
+        padding: 15px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    div.top {
+        position: absolute;
+        top: 10%;
+        right: 30%;
+        transform: translate(5%, 20%);
+        scrollbar-gutter: auto;
+        height: 600px;
+        width: 360px;
+        overflow: auto;
+        background-color: rgb(51, 50, 50);
+        color: white;
+        font-family: arial;
+        padding: 15px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
 }
